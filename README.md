@@ -19,7 +19,13 @@ AI was not used to generate any code or text that was used in this project. It w
 4.) Verify to see if expected value for the localization length of the SSH model matches the one calculate with data from probability distribution of zero eigenstates.
 
 5.) Numerically calculate the winding number for the SSH given a value of v and w and visualize it using the wave number and the pauli matrix representation of the hamiltonian. 
+## Objective Relevance and completion.
 
+### Objective 1: Hamiltonain Modeling
+Understanding the Hamiltonian of the SSH model is essentail to understanding many of its properties as by diagonalizing it one can obtain theenergy eigenstates and energy eigenvectors of each site of the model. This can then be used to understand the larger scale behavior of the model like why the zero energy eigenstates present at the edge sites of the SSH model are topologically protected. 
 
+The SSH Hamiltonian is:
+
+$$
 
         
