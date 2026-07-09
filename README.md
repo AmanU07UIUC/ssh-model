@@ -28,4 +28,5 @@ The SSH Hamiltonian is:
 
 $\hat{H} = v\sum_{m=1}^{N}\(\textbar m,B\rangle\langle m,A\textbar \+ \textbar m,A\rangle\langle m,B\textbar \) \+ w\sum_{m=1}^{N-1}\(\textbar m+1,A\rangle\langle m,B\textbar \+ \textbar m,B\rangle\langle m+1,A\textbar \)$
 
+The first summation corresponds to intracell hopping and the secoond intercell hopping. 
         
