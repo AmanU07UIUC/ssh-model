@@ -1,3 +1,6 @@
+REMINDER: GO BACK AND CORRELATE ALL OBJECTIVE TO SSH model being a simple example of topoologcal protected states. 
+
+
 # Su–Schrieffer–Heeger Model Project Introduction:
 The purpose of this project is to demonstrate a basic understanding of the some the core dynamics and features of the SSH model via simulating the model and highlighing these features using python. This includes using libraries like matplotlib, numpy, and mpmath to calculate various improtant quantities and graph key behaviors observed in the model.
 ## Context:
@@ -50,3 +53,15 @@ def Hamiltoniancreattion(n,v,w):
 ```
 The hamiltonian has 2n rows and 2n columns, where n is the number of cell so 2n is the number of site the electron could occupy. The values contaign i and j represent the column and the row that a matrix element belongs to as well as the corresponding bra and ket vector that comes with those rows. the values containing k represent the bra and ket vector already listed in the Hamiltonian equation. K takes the odd values betweeen 1 and 2n 
 so just k could represnt site A of a particular cell and k+1 could represent the other Site B of the cell, representing $\langle m,A \textbar m,b\rangle$. p1 and p2 then contain the values of the summations in the hamiltonian for a particular matrix element of the hamiltonian so by multiplying the appropraite coeefficents and adding them together one gets the value for a element of the hamiltonian. Repeat this process via the loops shown above and the output is a accurate hamiltonian for the SSH matrix given values of n,w, and v. 
+
+### Objective 2: Energy spectrum 
+By creating a graphical depiction of the energy spectrum of the SSH model fundamental properties of the model are revealed. In particular the bulk band gap of the SSH model, where all the sites in the bulk phase of the lattice cant occupy a zero energy eigenstate, becomes apparent leading to the SSH model demonstrating qualities of topological invariance.
+
+This energy spectrum depicts the energy eigenvalues of all the sites with respect to a variable v, the intracell hopping amplitude. This is because in the case of v = 0 and w non zero the energy eigen vector is forced upon by the edge states as it is isolated from the rest of the lattice. By then increasing v throughout a range we see the emergence of the bulk band gap which the zero eigenstate resides in, causing the zero eigenstate to be preserved since no site in the bulk phase can occupy a zero eigenstate due to the bulk band gap. This preservation of the zero eigenstate of the edge states then serves as a simple example of topological protected states.
+
+
+
+
+
+
+
