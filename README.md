@@ -15,17 +15,17 @@ AI was not used to generate any code or text that was used in this project. It w
 # Objectives:
 1.) Succesfully create the Hamiltonian matrix for the SSH model with variable paramaters of v-the intracell hopping amplitudes, w-the intercell hopping amplitude, and n-the number of cells in the lattice. 
 
-2.) Create an energy spectrum for SSH model that graphs its various energy eigenstates as a function of v and w. 
+2.) Create an energy spectrum for SSH model that graphs its various energy eigenstates as a function of v.
 
-3.) Create a probability distribution for the zero eigenstates of the SSH model for each site of the lattice.
+3.) Create a probability distribution for the probaility that a site host a zero eigenstate for all sites.
 
-4.) Verify to see if expected value for the localization length of the SSH model matches the one calculate with data from probability distribution of zero eigenstates.
+4.) Verify to see if the expected value for the localization length of the SSH model matches the one calculated with data from probability distribution of zero eigenstates.
 
-5.) Numerically calculate the winding number for the SSH given a value of v and w and visualize it using the wave number and the pauli matrix representation of the hamiltonian. 
+5.) Numerically calculate the winding number for the SSH given a value of v and w and visualize it using the wave number and the pauli matrix representation of the hamiltonian. v must be greater than w.
 ## Objective Relevance and completion.
 
 ### Objective 1: Hamiltonain Modeling
-Understanding the Hamiltonian of the SSH model is essentail to understanding many of its properties as by diagonalizing it one can obtain theenergy eigenstates and energy eigenvectors of each site of the model. This can then be used to understand the larger scale behavior of the model like why the zero energy eigenstates present at the edge sites of the SSH model are topologically protected. 
+Understanding the hamiltonian of the SSH model is essentail to understanding many of its properties as by diagonalizing it one can obtain the energy eigenstates and energy eigenvectors for each site in the model. This can then be used to understand the larger scale behavior of the model like why the zero energy eigenstates present at the edge sites of the lattice are topologically protected when w>v.
 
 The SSH Hamiltonian is:
 
@@ -33,31 +33,32 @@ $\hat{H} = v\sum_{m=1}^{N}\(\textbar m,B\rangle\langle m,A\textbar \+ \textbar m
 
 The first summation corresponds to intracell hopping and the secoond intercell hopping. 
 
-I simulated this using the fact that braket notation can be converted to kronecker delta where:
+I simulated this using the fact that bra-ket notation can be converted to kronecker delta where:
 $\langle a\textbar b\rangle = \delta_{a,b}$ (this is applicable here because all the eigenstates for the position of the electron are orthongonal to each other) 
 
-Using this conversion in combination with loops can yield the hamiltonian matrix:
+Using this convention in combination with loops one can yield the hamiltonian matrix:
 ```python
 def Hamiltoniancreattion(n,v,w): 
-    H = np.zeros((2*n, 2*n))
+    H = np.zeros((2*n, 2*n)) #Creating a hamiltonian representing 2n sites 
     for i in range(2*n):
         for j in range(2*n):
             p1=0
             p2=0
-            for k in range(1,2*n,2):
-                p1 += delta_kronecker(i+1,k+1)*delta_kronecker(j+1,k)+delta_kronecker(j+1,k+1)*delta_kronecker(i+1,k) 
+            for k in range(1,2*n,2): 
+                p1 += delta_kronecker(i+1,k+1)*delta_kronecker(j+1,k)+delta_kronecker(j+1,k+1)*delta_kronecker(i+1,k)
+                #This loop sums the product of the inner multiplication of the given bras and kets in the part of the hamiltonain equation that has v as its coefficent with the bras and kets associated with the hamiltonain matrix. 
             for k in range(1,2*(n-1),2):
                 p2 += delta_kronecker(i+1,k+2)*delta_kronecker(j+1,k+1)+delta_kronecker(j+1,k+2)*delta_kronecker(i+1,k+1)
+                #This loop sums the product of the inner multiplication of the given bras and kets in the part of the hamiltonain equation that has  w as its coefficent with the bras and kets associated with the hamiltonain matrix.
             H[i][j]= v*p1+w*p2
     return H
 ```
-The hamiltonian has 2n rows and 2n columns, where n is the number of cell so 2n is the number of site the electron could occupy. The values contaign i and j represent the column and the row that a matrix element belongs to as well as the corresponding bra and ket vector that comes with those rows. the values containing k represent the bra and ket vector already listed in the Hamiltonian equation. K takes the odd values betweeen 1 and 2n 
-so just k could represnt site A of a particular cell and k+1 could represent the other Site B of the cell, representing $\langle m,A \textbar m,b\rangle$. p1 and p2 then contain the values of the summations in the hamiltonian for a particular matrix element of the hamiltonian so by multiplying the appropraite coeefficents and adding them together one gets the value for a element of the hamiltonian. Repeat this process via the loops shown above and the output is a accurate hamiltonian for the SSH matrix given values of n,w, and v. 
+The hamiltonian has 2n rows and 2n columns, where n is the number of cell so 2n is the number of site the electron could occupy. The values containing i and j represent the column and the row that a matrix element belongs to as well as the corresponding bra and ket vector that are associated with those rows and columns. The values containing k represent the bra and ket vector already listed in the hamiltonian equation. K takes the odd values in [1,2n] so just k could represnt site A of a particular cell and k+1 could represent site B of the cell, representing $\langle m,A \textbar m,b\rangle$. p1 and p2 then contain the values of the summations in the hamiltonian for a particular matrix element. So by multiplying the appropraite coeefficents with p1 and p2 and adding them together one gets the value for a matrix element of the hamiltonian. Repeat this process via the loops shown above and the output is a accurate hamiltonian for the SSH matrix given values of n, w, and v. 
 
 ### Objective 2: Energy spectrum 
-By creating a graphical depiction of the energy spectrum of the SSH model fundamental properties of the model are revealed. In particular the bulk band gap of the SSH model, where all the sites in the bulk phase of the lattice cant occupy a zero energy eigenstate, becomes apparent leading to the SSH model demonstrating qualities of topological invariance.
+By creating a graphical depiction of the energy spectrum of the SSH model fundamental properties of the model are revealed. In particular the bulk band gap of the model, where all the sites in the bulk phase of the lattice cant occupy a zero energy eigenstate, becomes apparent. This bulk band gap can then be used to explain some on topologically invariant properties of the SSH model.
 
-This energy spectrum depicts the energy eigenvalues of all the sites with respect to a variable v, the intracell hopping amplitude. This is because in the case of v = 0 and w non zero the energy eigen vector is forced upon by the edge states as it is isolated from the rest of the lattice. By then increasing v throughout a range we see the emergence of the bulk band gap which the zero eigenstate resides in, causing the zero eigenstate to be preserved since no site in the bulk phase can occupy a zero eigenstate due to the bulk band gap. This preservation of the zero eigenstate of the edge states then serves as a simple example of topological protected states.
+This energy spectrum depicts the energy eigenvalues of all the sites with respect to a variable v, the intracell hopping amplitude. This is because in the case of v = 0 and w non zero, the zero energy eigen vector is forced upon by the edge states as they are isolated from the rest of the lattice. By then increasing v throughout a range we see the emergence of the bulk band gap which the zero eigenstate resides in. This prevents non zeroeigenstates resideing in the bulk to propogate into the zero edge eigenstates. This preservation of the zero edge eigenstate serves as a simple example of topological protected states.
 
 Consturcting the graph is straight forward as it just involved created an array of v values, creating the corresponding hamilitonians for each of those values and storing them in a larger array via a loop. Once those hamiltonians are created there eigenvalues can be extracted using numpy's eigh method and once stored in an array they can be graphed using plt's plot method. 
 ```python
@@ -71,20 +72,20 @@ Hmastereigvecs= []
 for k in range(40):
     Hk=Hmaster[k]
     eigvals, eigvecs = np.linalg.eigh(Hk)
-    Hmastereigvals.append(eigvals)# filling eigenvalue container array with eigenvalues
+    Hmastereigvals.append(eigvals)# filling eigenvalue container array with the eigenvalues of the hamilonians stored in the container array
     Hmastereigvecs.append(eigvecs)
 Hmastereigvals= np.array(Hmastereigvals)
 Hmastereigvecs= np.array(Hmastereigvecs)
 
 for k in range(8):
-    plt.plot(vvals,Hmastereigvals[:,k], label=f'Eigenvalue {k+1}') #Plotting each eigenvalue for every array at once
+    plt.plot(vvals,Hmastereigvals[:,k], label=f'Eigenvalue {k+1}') #Plotting the nth eigenvvalue across all hamiltonians at once. 
 plt.xlabel('v')
 plt.ylabel('Energy')
 plt.title('Spectrum of H(v)')
 plt.legend()
 plt.show()
 ```
-### Objective 3: Probability Distribution Of Zero Eigenstates:
+### Objective 3: Probability Distribution of Zero Eigenstates:
 By creating a probability distribution for the probability each site hosts a zero eigenstates we can verify if the SSH model does actually have protected zero eigenstates at the edge as well as yielding information on how these sites propogate deeper into the lattice.
 
 This distribition is created by exploiting a property of the eigh method where eigh sorts all eigen vectors and values of an array from greatest to least so the eigenvector associate with the zero eigenvalue would always in nth index where n is the number of cells in the lattice. So by squaring the nth index of the eigenvector array produced by the eigh method one can find the probability of obtaining the eigenvalue closest to 0.  
