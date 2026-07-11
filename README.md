@@ -59,8 +59,87 @@ By creating a graphical depiction of the energy spectrum of the SSH model fundam
 
 This energy spectrum depicts the energy eigenvalues of all the sites with respect to a variable v, the intracell hopping amplitude. This is because in the case of v = 0 and w non zero the energy eigen vector is forced upon by the edge states as it is isolated from the rest of the lattice. By then increasing v throughout a range we see the emergence of the bulk band gap which the zero eigenstate resides in, causing the zero eigenstate to be preserved since no site in the bulk phase can occupy a zero eigenstate due to the bulk band gap. This preservation of the zero eigenstate of the edge states then serves as a simple example of topological protected states.
 
+Consturcting the graph is straight forward as it just involved created an array of v values, creating the corresponding hamilitonians for each of those values and storing them in a larger array via a loop. Once those hamiltonians are created there eigenvalues can be extracted using numpy's eigh method and once stored in an array they can be graphed using plt's plot method. 
+```python
+vvals = np.linspace(0,3,40) #Creating array of v values
+Hmaster= np.zeros((40, 2*n, 2*n)) #Creating container hamiltonian array
+for k in range(40):
+    Hmaster[k]= Hamiltoniancreattion(n,vvals[k],w) #Filling container array with hamiltonians 
+print(np.shape(Hmaster))
+Hmastereigvals= [] # creating array to contain eigenvalues of all hamiltonians
+Hmastereigvecs= []
+for k in range(40):
+    Hk=Hmaster[k]
+    eigvals, eigvecs = np.linalg.eigh(Hk)
+    Hmastereigvals.append(eigvals)# filling eigenvalue container array with eigenvalues
+    Hmastereigvecs.append(eigvecs)
+Hmastereigvals= np.array(Hmastereigvals)
+Hmastereigvecs= np.array(Hmastereigvecs)
 
+for k in range(8):
+    plt.plot(vvals,Hmastereigvals[:,k], label=f'Eigenvalue {k+1}') #Plotting each eigenvalue for every array at once
+plt.xlabel('v')
+plt.ylabel('Energy')
+plt.title('Spectrum of H(v)')
+plt.legend()
+plt.show()
+```
+### Objective 3: Probability Distribution Of Zero Eigenstates:
+By creating a probability distribution for the probability each site hosts a zero eigenstates we can verify if the SSH model does actually have protected zero eigenstates at the edge as well as yielding information on how these sites propogate deeper into the lattice.
 
+This distribition is created by exploiting a property of the eigh method where eigh sorts all eigen vectors and values of an array from greatest to least so the eigenvector associate with the zero eigenvalue would always in nth index where n is the number of cells in the lattice. So by squaring the nth index of the eigenvector array produced by the eigh method one can find the probability of obtaining the eigenvalue closest to 0.  
+```python
+Hnew = Hamiltoniancreattion(10,v,w) #new hamiltonian
+eigvalsnew, eigvecsnew = np.linalg.eigh(Hnew)
+plt.plot(np.linspace(1,20,20),eigvecsnew[:,10]*eigvecsnew[:,10]+eigvecsnew[:,9]*eigvecsnew[:,9])#plotting the 1-20 on the x axis, representative of #the sites, and the square of each the 10th and 11th eigenvector (asscocaited with the zero eigen state) and adding them.
+plt.xlabel('Site')
+plt.ylabel('Probability Density of Zero Eigenstate')
+plt.xticks(np.arange(0, 21, 1))
+plt.title('Zero Eigenstates of the SSH Model')
+plt.legend()
+plt.show()
+```
+
+### Objective 4: Localization Length verification:
+The localization length is just a measure of how fast a eigenstate decays. For the SSH model it follows the formula: $\frac{1}{\log{\frac{w}{v}}}$. Since localization length is a mesure of how fast a eigenstate decays in a inverse logmarithic scale we can approximate it by taking the inverse logarithm of the ratio of zero eigenstate vectors from one site to another. We skip every other site since they decreases by 1 since the zero eigenstate can only propogate through 1 sublattice. 
+
+```python
+print("Localization Length:",1/np.log(-1*(eigvecsnew[0,10]+eigvecsnew[0,9])/(eigvecsnew[2,10]+eigvecsnew[2,9])),1/(np.log(4/3)))
+```
+
+### Objective 5: Winding number calculation\graphing:
+The winding number is the topoligcal invaraint of the SSH model. It can only take values of 1 or 0. If it is 1 the lattice is in a topological phase and it has protected zero edge eigenstates and if it is 0 it is in its trivial phase and lacks such topological invaraince. The reason for this association between value in phase becomes clear in the defintion of the winding number and in the rewritting of the hamiltonian with pauli matricies.
+
+The hamiltonian of the bulk of the lattice can be rewritten as: $\hat{H}= d_x\(k\)\hat{\sigma_x}+d_y\(k\)\hat{\sigma_y}=(v\+ w\cos{k})\hat{\sigma_x}+(w\sin{k})\hat{\sigma_y}$ where k$\in$[0,2$\pi$]. If a plane is created with the axis being dx and dy and a function paramertized as (d_x(k),d_y(k)) with k going from 0 to 2$\pi$ then the winding number is defined as the amount of times k traces a curve that ecompasses the origin.
+
+For the SSH model this can only 1 or 0. If it is 1 then this implies that w>v hence leading to a topological phase as the edge staes are isolates and so must become zero eigen values. If the winding number is 0 then v>w and the edge sites aren't isolated and so the topological behavior doesn't emerge. 
+
+Displaying the winding numebr graphicaly requires creating an array of k values from 0 to pi and then plotting a graph using matplotlib with the x values being dx(k) with k being the entire array of k values and the y values being dy(k) with k being the entire array of k values.
+
+```python
+v = float(input("Enter v- the ampplitude for intracell hopping: "))
+w = float(input("Enter w- the ampplitude for intercell hopping: "))
+k = np.linspace(0, 2*np.pi, 100) #array of k values
+plt.plot(v+w*np.cos(k),w*np.sin(k)) #plugging in the k array into dx(k) and dy(k) 
+plt.xlabel('$d_{x}$')
+plt.ylabel('$d_{y}$')
+plt.xticks(np.arange(-10, 11, 1))
+plt.yticks(np.arange(-10, 11, 1))
+plt.axhline(0, color='black', lw=0.5)
+plt.axvline(0, color='black', lw=0.5)
+plt.show()
+
+```
+
+There is also a formula which yields the winding number direclty: $v\= \frac{1}{2\pi i}\int_{-\pi}^{\pi}dk\frac{1}{dk}\log{h(k)}$.
+Where $h(k) \= d_x\(k\)-id_y\(k\)$ 
+
+I replicated this using the mpmath library:
+```python
+diffel= lambda k:mp.log(v+w*mp.exp(-1*mp.j*k)) #creating the log h(k) part of the function 
+integral = (mp.quad(lambda k: mp.diff(diffel, k), [-mp.pi, mp.pi]))/(2*mp.pi*mp.j) #differentiating and integrating the log h(k) function
+print("Winding number:", mp.nint(integral))
+```
 
 
 
