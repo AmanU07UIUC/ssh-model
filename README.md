@@ -1,8 +1,11 @@
-REMINDER: GO BACK AND CORRELATE ALL OBJECTIVE TO SSH model being a simple example of topoologcal protected states. 
+
 
 
 # Su–Schrieffer–Heeger Model Project Introduction:
-The purpose of this project is to demonstrate a basic understanding of the some the core dynamics and features of the SSH model via simulating the model and highlighing these features using python. This includes using libraries like matplotlib, numpy, and mpmath to calculate various improtant quantities and graph key behaviors observed in the model.
+The purpose of this project is to demonstrate a basic understanding of the some the core dynamics and features of the SSH model via simulating the model and highlighing these features using python. I will be focusing on how the zero eigenstates occur in the edge sites of the model as well how these states become topologicaly protected. I will be using libraries like matplotlib, numpy, and mpmath to calculate various improtant quantities and graph key behaviors observed in the model.
+## Why the SSH model?:
+My interest in the model lies in it being a simple example of topological phases occur in materials and so by learning about it I hope to better understand how these phases occur and some of the underlying dynamics that make them possible. 
+
 ## Context:
 This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequsite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsed, Chapter 1 of *A Short Course onTopological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb´ oth, L. Oroszl´any, A. P´ alyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
 ## AI statement:
@@ -113,7 +116,7 @@ The winding number is the topoligcal invaraint of the SSH model. It can only tak
 
 The hamiltonian of the bulk of the lattice can be rewritten as: $\hat{H}= d_x\(k\)\hat{\sigma_x}+d_y\(k\)\hat{\sigma_y}=(v\+ w\cos{k})\hat{\sigma_x}+(w\sin{k})\hat{\sigma_y}$ where k $\in$ [0,2 $\pi$ ]. If a plane is created with the axis being dx and dy and a function paramertized as (d_x(k),d_y(k)) with k going from 0 to 2 $\pi$ then the winding number is defined as the amount of times k traces a curve that ecompasses the origin.
 
-For the SSH model the windinding numebr can only 1 or 0. If it is 1 then this implies that w>v hence leading to a topological phase as the edge states are isolates and so must become zero eigen values. If the winding number is 0 then v>w and the edge sites aren't isolated and so the topological behavior doesn't emerge. 
+For the SSH model the winding numebr can only be 1 or 0. If it is 1 then this implies that w>v hence leading to a topological phase as the edge states are isolates and so must become zero eigen values. If the winding number is 0 then v>w and the edge sites aren't isolated and so the topological behavior doesn't emerge. 
 
 Displaying the winding numebr graphicaly requires creating an array of k values from 0 to pi and then plotting a graph using matplotlib with the x values being dx(k) with k being the entire array of k values and the y values being dy(k) with k being the entire array of k values.
 
@@ -142,6 +145,7 @@ integral = (mp.quad(lambda k: mp.diff(diffel, k), [-mp.pi, mp.pi]))/(2*mp.pi*mp.
 print("Winding number:", mp.nint(integral))
 ```
 
-
+# Summary:
+The goal of this project is to simulate the SSH model to see how its topological phase emerges and to examine the properties of this phase. Each objective is designed to highlight the topological properties of the model with the exception of objective 1 which just seeks to accuratley create the hamiltonian for the model so it can be used in later objectives. Objective 2 illustrates the bulk band gap which leads to the zero eigen states to be protected from the bulk's nonzero eigen states propogation. Objective 3 gleans more insight into how the these zero edge eigenstate propogate as well as illustrating there localization towards the edge. Objective 4 is used to verify that the simulation is indeed accurate by verifying that the localization length created with data generated in objective 3 is indeed approximate to expected localization length value. Objective 5 quantifies the topological properties of the SSH model by calculating a topologically invvariant quantity: the winding number. 
 
 
