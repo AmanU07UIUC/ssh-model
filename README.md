@@ -135,7 +135,8 @@ plt.axvline(0, color='black', lw=0.5)
 plt.show()
 
 ```
-
+v=3 and w=4 were the values used in the graph below:
+![image alt](https://github.com/AmanU07UIUC/ssh-model/blob/545384d72047c1da4058d37f26dc0b333502b8ba/Screenshot%202026-08-05%20134939.png)
 There is also a formula which yields the winding number directly: $v\= \frac{1}{2\pi i}\int_{-\pi}^{\pi}dk\frac{1}{dk}\log{h(k)}$.
 Where $h(k) \= d_x\(k\)-id_y\(k\)$ 
 
