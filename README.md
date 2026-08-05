@@ -7,11 +7,11 @@ The purpose of this project is to demonstrate a basic understanding of some of t
 My interest in the model lies in it being a simple example of topological phases that occur in materials and so, by learning about it, I hope to better understand how these phases occur and some of the underlying dynamics that make them possible. 
 
 ## Context:
-This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequsite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsed, Chapter 1 of *A Short Course onTopological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb´ oth, L. Oroszl´any, A. P´ alyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
+This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course onTopological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb´ oth, L. Oroszl´any, A. P´ alyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
 ## AI statement:
 The idea to simulate the SSH model was a specific suggestion given to me by AI when I asked it for project suggestions I could work on over the summer. Furthermore, AI was used to structure the progress of this project, including recommending me the above listed resources and creating a timeline to complete certain goals by. AI was also used to create the objectives listed below. 
 
-AI was also used in learning material. When I was stuck on a certain concept or topic in my reasearch, I would often ask AI to provide an explanation of the topic as well as use it to gauge my own understanding of said topic. AI was also used to learn about the mpmath library, which I was previously unaware of before starting this project. I used it to learn how the mpmath.diff and mpmath.quad methods worked as well as how the lambda keyword works in python. 
+AI was also used in learning material. When I was stuck on a certain concept or topic in my research, I would often ask AI to provide an explanation of the topic as well as use it to gauge my own understanding of said topic. AI was also used to learn about the mpmath library, which I was previously unaware of before starting this project. I used it to learn how the mpmath.diff and mpmath.quad methods worked as well as how the lambda keyword works in python. 
 
 AI was not used to generate any code or text that was used in this project. It was never prompted to tell me how to specifically achieve any of the coding objectives in this project. It was used in 1 instance for debugging: The error it caught that I didn't, was that I failed to include "mp." in front of the j for the code calculating the winding number.  
 
@@ -20,7 +20,7 @@ AI was not used to generate any code or text that was used in this project. It w
 
 2.) Create an energy spectrum for SSH model that graphs its various energy eigenstates as a function of v.
 
-3.) Create a probability distribution for the probaility that a site host a zero eigenstate for all sites.
+3.) Create a probability distribution for the probability that a site host a zero eigenstate for all sites.
 
 4.) Verify to see if the expected value for the localization length of the SSH model matches the one calculated with data from the probability distribution of zero eigenstates.
 
@@ -41,7 +41,7 @@ $\langle a\textbar b\rangle = \delta_{a,b}$ (this is applicable here because all
 
 Using this convention in combination with loops one can yield the hamiltonian matrix:
 ```python
-def Hamiltoniancreattion(n,v,w): 
+def Hamiltoniancreation(n,v,w): 
     H = np.zeros((2*n, 2*n)) #Creating a hamiltonian representing 2n sites 
     for i in range(2*n):
         for j in range(2*n):
@@ -61,14 +61,14 @@ The hamiltonian has 2n rows and 2n columns, where n is the number of cells, so 2
 ### Objective 2: Energy spectrum 
 By creating a graphical depiction of the energy spectrum of the SSH model, fundamental properties of the model are revealed. In particular the bulk band gap of the model, where none of the eigenvalues can obtain a value in the range of the least positive and  least negative eigenvalues, becomes apparent. This bulk band gap can then be used to explain some of the topologically invariant properties of the SSH model.
 
-This energy spectrum depicts the energy eigenvalues of all the sites with respect to a variable v, the intracell hopping amplitude. This is because in the case of v = 0 and w non zero, the zero energy eigenvector is forced upon by the edge states as they are isolated from the rest of the lattice. By then increasing v throughout a range we see the emergence of the bulk band gap which the zero eigenstate resides in. This prevents the non-zero eigenstates of the bulk and the zero eigenstates of the edge from hybradizing, protecting the zero eigenstates. This preservation of the zero edge eigenstate serves as a simple example of topological protected states.
+This energy spectrum depicts the energy eigenvalues of all the sites with respect to a variable v, the intracell hopping amplitude. This is because in the case of v = 0 and w non zero, the zero energy eigenvector is forced upon by the edge states as they are isolated from the rest of the lattice. By then increasing v throughout a range we see the emergence of the bulk band gap which the zero eigenstate resides in. This prevents the non-zero eigenstates of the bulk and the zero eigenstates of the edge from hybridizing, protecting the zero eigenstates. This preservation of the zero edge eigenstate serves as a simple example of topological protected states.
 
 Constructing the graph was straightforward as it just involved created an array of v values, creating the corresponding Hamiltonians for each of those values and storing them in a larger array via a loop. Once those Hamiltonians are created, their eigenvalues can be extracted using numpy's eigh method and once stored in an array, they can be graphed using plt's plot method. 
 ```python
 vvals = np.linspace(0,3,40) #Creating array of v values
 Hmaster= np.zeros((40, 2*n, 2*n)) #Creating container hamiltonian array
 for k in range(40):
-    Hmaster[k]= Hamiltoniancreattion(n,vvals[k],w) #Filling container array with hamiltonians 
+    Hmaster[k]= Hamiltoniancreation(n,vvals[k],w) #Filling container array with hamiltonians 
 print(np.shape(Hmaster))
 Hmastereigvals= [] # creating array to contain eigenvalues of all hamiltonians
 Hmastereigvecs= []
@@ -93,7 +93,7 @@ By creating a probability distribution for the probability that each site hosts 
 
 This distribution is created by exploiting a property of the eigh method where eigh sorts all eigenvectors and eigenvalues of an array from least to greatest, so the eigen vector associated with the zero eigenvalue would always be in nth index, since there are 2n eigenvalues. By squaring the nth index of the eigenvector array produced by the eigh method one can find the probability of obtaining the eigenvalue closest to 0.  
 ```python
-Hnew = Hamiltoniancreattion(10,v,w) #new hamiltonian
+Hnew = Hamiltoniancreation(10,v,w) #new hamiltonian
 eigvalsnew, eigvecsnew = np.linalg.eigh(Hnew)
 plt.plot(np.linspace(1,20,20),eigvecsnew[:,10]*eigvecsnew[:,10]+eigvecsnew[:,9]*eigvecsnew[:,9])#plotting the 1-20 on the x axis, representative of #the sites, and the square of each the 10th and 11th eigenvector (asscocaited with the zero eigen state) and adding them.
 plt.xlabel('Site')
@@ -121,8 +121,8 @@ For the SSH model the winding number can only be 1 or 0. For the winding number 
 Displaying the winding number graphically requires creating an array of k values from 0 to pi and then plotting a graph using matplotlib with the x values being dx(k) with k being the entire array of k values and the y values being dy(k) with k being the entire array of k values.
 
 ```python
-v = float(input("Enter v- the ampplitude for intracell hopping: "))
-w = float(input("Enter w- the ampplitude for intercell hopping: "))
+v = float(input("Enter v- the amplitude for intracell hopping: "))
+w = float(input("Enter w- the amplitude for intercell hopping: "))
 k = np.linspace(0, 2*np.pi, 100) #array of k values
 plt.plot(v+w*np.cos(k),w*np.sin(k)) #plugging in the k array into dx(k) and dy(k) 
 plt.xlabel('$d_{x}$')
@@ -135,7 +135,7 @@ plt.show()
 
 ```
 
-There is also a formula which yields the winding number direclty: $v\= \frac{1}{2\pi i}\int_{-\pi}^{\pi}dk\frac{1}{dk}\log{h(k)}$.
+There is also a formula which yields the winding number directly: $v\= \frac{1}{2\pi i}\int_{-\pi}^{\pi}dk\frac{1}{dk}\log{h(k)}$.
 Where $h(k) \= d_x\(k\)-id_y\(k\)$ 
 
 I replicated this using the mpmath library:
@@ -146,6 +146,6 @@ print("Winding number:", mp.nint(integral))
 ```
 
 # Summary:
-The goal of this project is to simulate the SSH model to see how its topological phase emerges and to examine the properties of this phase. Each objective is designed to highlight the topological properties of the model with the exception of objective 1, which just seeks to accurately create the Hamiltonian for the model so it can be used in later objectives. Objective 2 illustrates the bulk band gap which leads to the zero eigen states to be protected from hybradizing with the bulk's nonzero eigenstates. Objective 3 gleans more insight into how the these zero edge eigenstate propogate as well as illustrating their localization towards the edge. Objective 4 is used to verify that the simulation is indeed accurate by verifying that the localization length created with data generated in objective 3 is indeed approximate to the expected localization length value. Objective 5 quantifies the topological properties of the SSH model by calculating a topologically invariant quantity: the winding number. 
+The goal of this project is to simulate the SSH model to see how its topological phase emerges and to examine the properties of this phase. Each objective is designed to highlight the topological properties of the model with the exception of objective 1, which just seeks to accurately create the Hamiltonian for the model so it can be used in later objectives. Objective 2 illustrates the bulk band gap which leads to the zero eigen states to be protected from hybridizing with the bulk's nonzero eigenstates. Objective 3 gleans more insight into how the these zero edge eigenstate propogate as well as illustrating their localization towards the edge. Objective 4 is used to verify that the simulation is indeed accurate by verifying that the localization length created with data generated in objective 3 is indeed approximate to the expected localization length value. Objective 5 quantifies the topological properties of the SSH model by calculating a topologically invariant quantity: the winding number. 
 
 
