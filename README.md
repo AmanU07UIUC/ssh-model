@@ -7,9 +7,9 @@ The purpose of this project is to demonstrate a basic understanding of some of t
 My interest in the model lies in it being a simple example of topological phases that occur in materials and so, by learning about it, I hope to better understand how these phases occur and some of the underlying dynamics that make them possible. 
 
 ## Context:
-This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course onTopological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb´ oth, L. Oroszl´any, A. P´ alyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
+This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course on Topological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb´ oth, L. Oroszl´any, A. P´ alyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
 ## AI statement:
-The idea to simulate the SSH model was a specific suggestion given to me by AI when I asked it for project suggestions I could work on over the summer. Furthermore, AI was used to structure the progress of this project, including recommending me the above listed resources and creating a timeline to complete certain goals by. AI was also used to create the objectives listed below. 
+The idea to simulate the SSH model was a specific suggestion given to me by AI when I asked it for project suggestions I could work on over the summer. Furthermore, AI was used to structure the progress of this project, including recommending me the above listed resources and creating a timeline to complete certain goals by. 
 
 AI was also used in learning material. When I was stuck on a certain concept or topic in my research, I would often ask AI to provide an explanation of the topic as well as use it to gauge my own understanding of said topic. AI was also used to learn about the mpmath library, which I was previously unaware of before starting this project. I used it to learn how the mpmath.diff and mpmath.quad methods worked as well as how the lambda keyword works in python. 
 
@@ -34,7 +34,7 @@ The SSH Hamiltonian is:
 
 $\hat{H} = v\sum_{m=1}^{N}\(\textbar m,B\rangle\langle m,A\textbar \+ \textbar m,A\rangle\langle m,B\textbar \) \+ w\sum_{m=1}^{N-1}\(\textbar m+1,A\rangle\langle m,B\textbar \+ \textbar m,B\rangle\langle m+1,A\textbar \)$
 
-The first summation corresponds to intracell hopping and the secoond intercell hopping. 
+The first summation corresponds to intracell hopping and the second intercell hopping. 
 
 I simulated this using the fact that bra-ket notation can be converted to kronecker delta where:
 $\langle a\textbar b\rangle = \delta_{a,b}$ (this is applicable here because all the eigenstates for the position of the electron are orthongonal to each other) 
