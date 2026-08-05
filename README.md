@@ -7,7 +7,7 @@ The purpose of this project is to demonstrate a basic understanding of some of t
 My interest in the model lies in it being a simple example of topological phases that occur in materials and so, by learning about it, I hope to better understand how these phases occur and some of the underlying dynamics that make them possible. 
 
 ## Context:
-This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course on Topological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb$o^´$th, L. Oroszl$a^´$ny, A. P$a^´$lyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
+This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course on Topological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asbóth, L. Oroszlány, A. Pályi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
 ## AI statement:
 The idea to simulate the SSH model was a specific suggestion given to me by AI when I asked it for project suggestions I could work on over the summer. Furthermore, AI was used to structure the progress of this project, including recommending me the above listed resources and creating a timeline to complete certain goals by. 
 
@@ -16,7 +16,7 @@ AI was also used in learning material. When I was stuck on a certain concept or 
 AI was not used to generate any code or text that was used in this project. It was never prompted to tell me how to specifically achieve any of the coding objectives in this project. It was used in 1 instance for debugging: The error it caught that I didn't, was that I failed to include "mp." in front of the j for the code calculating the winding number.  
 
 # Objectives:
-1.) Successfully create the Hamiltonian matrix for the SSH model with variable parameters of v-the intra cell hopping amplitudes, w-the inter cell hopping amplitude, and n-the number of cells in the lattice. 
+1.) Successfully create the Hamiltonian matrix for the SSH model with variable parameters of v-the intra cell hopping amplitude, w-the inter cell hopping amplitude, and n-the number of cells in the lattice. 
 
 2.) Create an energy spectrum for SSH model that graphs its various energy eigenstates as a function of v.
 
@@ -25,7 +25,7 @@ AI was not used to generate any code or text that was used in this project. It w
 4.) Verify to see if the expected value for the localization length of the SSH model matches the one calculated with data from the probability distribution of zero eigenstates.
 
 5.) Numerically calculate the winding number for the SSH given a value of v and w and visualize it using the wave number and the Pauli matrix representation of the Hamiltonian. v must be greater than w.
-## Objective Relevance and completion.
+## Objective Relevance and completion:
 
 ### Objective 1: Hamiltonain Modeling
 Understanding the Hamiltonian of the SSH model is essential to understanding many of its properties, as by diagonalizing it, one can obtain the energy eigenstates and energy eigenvectors for each site in the model. This can then be used to understand the larger scale behavior of the model, like why the zero energy eigenstates present at the edge sites of the lattice are topologically protected when w>v.
@@ -56,7 +56,7 @@ def Hamiltoniancreation(n,v,w):
             H[i][j]= v*p1+w*p2
     return H
 ```
-The Hamiltonian has 2n rows and 2n columns, where n is the number of cells, so 2n is the number of sites the electron could occupy. The values containing i and j represent the column and the row that a matrix element belongs to as well as the corresponding bra and ket vectors that are associated with those rows and columns. The values containing k represent the bra and ket vector already listed in the Hamiltonian equation. K takes the odd values in [1,2n] so just k could represent site A of a particular cell and k+1 could represent site B of the cell, representing $\langle m,A \textbar m,b\rangle$. p1 and p2 then contain the values of the summations in the Hamiltonian for a particular matrix element. So by multiplying the appropriate coefficients with p1 and p2 and adding them together, one gets the value for a matrix element of the Hamiltonian. Repeat this process via the loops shown above, and the output is an accurate Hamiltonian for the SSH matrix given values of n, w, and v. 
+The Hamiltonian has 2n rows and 2n columns, where n is the number of cells, so 2n is the number of sites the electron could occupy. The values containing i and j represent the column and the row that a matrix element belongs to as well as the corresponding bra and ket vectors that are associated with those rows and columns. The values containing k represent the bra and ket vector already listed in the Hamiltonian equation. K takes the odd values in [1,2n] so just k could represent site A of a particular cell and k+1 could represent site B of the same cell, representing $\langle m,A \textbar m,b\rangle$. p1 and p2 then contain the values of the summations in the Hamiltonian for a particular matrix element. So by multiplying the appropriate coefficients with p1 and p2 and adding them together, one gets the value for a matrix element of the Hamiltonian. Repeat this process via the loops shown above, and the output is an accurate Hamiltonian for the SSH matrix given values of n, w, and v. 
 
 ### Objective 2: Energy spectrum 
 By creating a graphical depiction of the energy spectrum of the SSH model, fundamental properties of the model are revealed. In particular, the bulk band gap of the model, where none of the eigenvalues can obtain a value in the range of the least positive and least negative eigenvalues, becomes apparent. This bulk band gap can then be used to explain some of the topologically invariant properties of the SSH model.
