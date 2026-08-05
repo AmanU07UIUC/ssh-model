@@ -2,12 +2,12 @@
 
 
 # Su–Schrieffer–Heeger Model Project Introduction:
-The purpose of this project is to demonstrate a basic understanding of some of the core dynamics and features of the SSH model via simulating the model and highlighting these features using python. I will be focusing on how the zero eigenstates occur on the edge sites of the model as well how these states become topologically protected. I will be using libraries like matplotlib, numpy, and mpmath to calculate various important quantities and graph key behaviors observed in the model.
+The purpose of this project is to demonstrate a basic understanding of some of the core dynamics and features of the SSH model via simulating the model and highlighting these features using python. I will be focusing on how the zero eigenstates occur on the edge sites of the model as well as how these states become topologically protected. I will be using libraries like matplotlib, numpy, and mpmath to calculate various important quantities and graph key behaviors observed in the model.
 ## Why the SSH model?:
 My interest in the model lies in it being a simple example of topological phases that occur in materials and so, by learning about it, I hope to better understand how these phases occur and some of the underlying dynamics that make them possible. 
 
 ## Context:
-This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course on Topological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb´ oth, L. Oroszl´any, A. P´ alyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
+This is a self directed summer project conducted by a rising undergraduate physics sophomore. I learned the prerequisite knowledge about quantum mechanics and the SSH model by reading: Chapters 1-5 of *A Modern Approach to Quantum Mechanics* by John S. Townsend, Chapter 1 of *A Short Course on Topological Insulators: Band-structure topology and edge states in one and two dimensions* by J. K. Asb$o^´$th, L. Oroszl$a^´$ny, A. P$a^´$lyi, and chapter 11 of *The Oxford Solid State Basics-Oxford University Press* by Steven H. Simon. 
 ## AI statement:
 The idea to simulate the SSH model was a specific suggestion given to me by AI when I asked it for project suggestions I could work on over the summer. Furthermore, AI was used to structure the progress of this project, including recommending me the above listed resources and creating a timeline to complete certain goals by. 
 
