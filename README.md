@@ -88,6 +88,7 @@ plt.title('Spectrum of H(v)')
 plt.legend()
 plt.show()
 ```
+![image alt](https://github.com/AmanU07UIUC/ssh-model/blob/2e6b7766260bddaeeffb05976f03b1303cc0d405/Screenshot%202026-08-05%20134657.png)
 ### Objective 3: Probability Distribution of Zero Eigenstates:
 By creating a probability distribution for the probability that each site hosts a zero eigenstates, we can verify if the SSH model does actually have protected zero eigenstates at the edge as well as yield information on how these sites propagate deeper into the lattice.
 
@@ -103,7 +104,7 @@ plt.title('Zero Eigenstates of the SSH Model')
 plt.legend()
 plt.show()
 ```
-
+![image alt]()
 ### Objective 4: Localization Length verification:
 The localization length is just a measure of how fast an eigenstate decays. For the SSH model it follows the formula: $\frac{1}{\log{\frac{w}{v}}}$. Since localization length is a measure of how fast a eigenstate decays on a inverse logarithmic scale we can approximate it by taking the inverse logarithm of the ratio of zero eigenstate vectors from one site to another. We skip every other site since the zero eigenstate is forced by chiral symmetry to only occupy 1 state in a cell, limiting propagation to one sublattice. 
 
