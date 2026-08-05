@@ -104,7 +104,7 @@ plt.title('Zero Eigenstates of the SSH Model')
 plt.legend()
 plt.show()
 ```
-![image alt]()
+![image alt](https://github.com/AmanU07UIUC/ssh-model/blob/cd97c8a53904f0df70d4a6051a67267aad33ff61/Screenshot%202026-08-05%20134929.png)
 ### Objective 4: Localization Length verification:
 The localization length is just a measure of how fast an eigenstate decays. For the SSH model it follows the formula: $\frac{1}{\log{\frac{w}{v}}}$. Since localization length is a measure of how fast a eigenstate decays on a inverse logarithmic scale we can approximate it by taking the inverse logarithm of the ratio of zero eigenstate vectors from one site to another. We skip every other site since the zero eigenstate is forced by chiral symmetry to only occupy 1 state in a cell, limiting propagation to one sublattice. 
 
